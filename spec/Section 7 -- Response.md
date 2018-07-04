@@ -91,18 +91,22 @@ represent list indices should be 0-indexed integers. If the error happens
 in an aliased field, the path to the error should use the aliased name, since
 it represents a path in the response, not in the query.
 
-For example, if fetching one of the friends' names fails in the following
+For example, if fetching one of the friends names fails in the following
 query:
 
 ```graphql example
 {
-  hero(episode: $episode) {
+  hero {
     name
     heroFriends: friends {
-      id
-      name
+      ...characterInfo
     }
   }
+}
+
+fragment characterInfo on Character {
+  id
+  name
 }
 ```
 
